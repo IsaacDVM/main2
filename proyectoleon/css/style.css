@@ -1,0 +1,27 @@
+* {
+    
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: space-around;
+    background: linear-gradient(to right, rgb(241, 156, 185), rgb(255, 187, 145));
+}
+
+#cajacentral {
+    border-color: black;
+    border-width: 2px;
+    border-style: double;
+    padding: 50px 20px 50px 20px;
+    align-items: center;
+}
+
+#cajaproblema {
+    margin: 30px auto;
+
+}
+
+img {
+    color: transparent;
+}
