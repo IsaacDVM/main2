@@ -46,7 +46,8 @@ switch (fecha.getMonth()){
 }
 function createSuma(){
     imagenElegida.src = "img/clean.png";
-    document.getElementById('resumen').innerHTML=`Has hecho ${numIntentos} y has acertado ${numAciertos} hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
+    document.getElementById('resumen').innerHTML= `Has hecho ${numIntentos} ejercicios y has acertado ${numAciertos}. 
+Hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
     document.getElementById("res").value = "";
     num1 = Math.floor(Math.random() * 9 + 1);
     num2 =  Math.floor(Math.random() * 9 + 1);
