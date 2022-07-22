@@ -2,9 +2,51 @@ let num1;
 let num2;
 let typeOpera;
 let imagenElegida = document.getElementById("win-lose");
-
+let numIntentos = 0;
+let numAciertos = 0;
+let fecha = new Date;
+let mes;
+switch (fecha.getMonth()){
+    case 0:
+        mes = "Enero";
+        break;
+    case 1:
+        mes = "Febrero";
+        break;
+    case 2:
+        mes = "Marzo";
+        break;
+    case 3:
+        mes = "Abril";
+        break;
+    case 4:
+        mes = "Mayo";
+        break;
+    case 5:
+        mes = "Junio";
+        break;
+    case 6:
+        mes = "Julio";
+        break;
+    case 7:
+        mes = "Agosto";
+        break;
+    case 8:
+        mes = "Septiembre";
+        break;
+    case 9:
+        mes = "Octubre";
+        break;
+    case 10:
+        mes = "Noviembre";
+        break;
+    case 11:
+        mes = "Diciembre";
+        break;
+}
 function createSuma(){
     imagenElegida.src = "img/clean.png";
+    document.getElementById('resumen').innerHTML=`Has hecho ${numIntentos} y has acertado ${numAciertos} hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
     document.getElementById("res").value = "";
     num1 = Math.floor(Math.random() * 9 + 1);
     num2 =  Math.floor(Math.random() * 9 + 1);
@@ -19,6 +61,7 @@ function createSuma(){
 function createResta(){
     imagenElegida.src = "img/clean.png";
     document.getElementById("res").value = "";
+    document.getElementById('resumen').innerHTML=`Has hecho ${numIntentos} y has acertado ${numAciertos} hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
     num1 = Math.floor(Math.random() * 16 + 2);
     let cosita = Math.floor(Math.random() * 9 + 1);
     num2 =  num1 - cosita;
@@ -45,6 +88,7 @@ function createResta(){
 }
 function check(){
     let res;
+    numIntentos += 1;
     if (typeOpera == '+'){
         res = num1 + num2;
     }
@@ -53,6 +97,7 @@ function check(){
     }
     let userRes = parseInt(document.getElementById("res").value);
     if(res === userRes){
+        numAciertos += 1;
         imagenElegida.src = "img/leonypokes.png";
         if (typeOpera === '-'){
             setTimeout(createSuma,1000);
@@ -67,4 +112,5 @@ function check(){
         alert("¡¡¡has fallado!!!");
     }
 }
+document.getElementById('res').addEventListener('keydown', event => {if(event.code === 'Enter') {check();}});
 window.onload = createSuma();

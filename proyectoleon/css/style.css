@@ -1,12 +1,17 @@
 * {
     
     font-family:Verdana, Geneva, Tahoma, sans-serif;
+
 }
 
 body {
+    background: linear-gradient(to right, rgb(241, 156, 185), rgb(255, 187, 145));
+
+}
+
+#cuerpo {
     display: flex;
     justify-content: space-around;
-    background: linear-gradient(to right, rgb(241, 156, 185), rgb(255, 187, 145));
 }
 
 #cajacentral {
@@ -24,4 +29,10 @@ body {
 
 img {
     color: transparent;
+}
+
+#foot {
+    font-size: 10px;
+    margin: 200px auto;
+    text-align: center;
 }
