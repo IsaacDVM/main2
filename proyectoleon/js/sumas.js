@@ -43,7 +43,19 @@ switch (fecha.getMonth()){
     case 11:
         mes = "Diciembre";
         break;
+} 
+function beginUser(){
+    let user;
+    let patron = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
+    do {
+        user = prompt("Introduce tu nombre de usuario sin espacios");
+    } while (patron.test(user)===false){
+    }
+    console.log(`Usario ${user} con formato válido...preparando conexión servidor para probar si estás autorizado`);
+    localStorage.setItem("user", user);
+    createSuma();
 }
+
 function createSuma(){
     imagenElegida.src = "img/clean.png";
     document.getElementById('resumen').innerHTML= `Has hecho ${numIntentos} ejercicios y has acertado ${numAciertos}. 
@@ -114,4 +126,4 @@ function check(){
     }
 }
 document.getElementById('res').addEventListener('keydown', event => {if(event.code === 'Enter') {check();}});
-window.onload = createSuma();
+window.onload = beginUser();

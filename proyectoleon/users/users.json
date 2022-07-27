@@ -1,0 +1,20 @@
+[
+{
+    "user": "tester",
+    "edad": 9,
+    "last": null,
+    "best": null
+},
+{
+    "user": "León",
+    "edad": 7,
+    "last": null,
+    "best": null
+},
+{
+    "user": "Isaac",
+    "edad": 42,
+    "last": null,
+    "best": null
+}
+]
