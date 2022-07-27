@@ -2,19 +2,19 @@
 {
     "user": "tester",
     "edad": 9,
-    "last": null,
-    "best": null
+    "last": 0,
+    "best": 0
 },
 {
     "user": "León",
     "edad": 7,
-    "last": null,
-    "best": null
+    "last": 0,
+    "best": 0
 },
 {
     "user": "Isaac",
     "edad": 42,
-    "last": null,
-    "best": null
+    "last": 0,
+    "best": 0
 }
 ]

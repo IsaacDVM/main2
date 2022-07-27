@@ -53,9 +53,26 @@ function beginUser(){
     }
     console.log(`Usario ${user} con formato válido...preparando conexión servidor para probar si estás autorizado`);
     localStorage.setItem("user", user);
+    importUsers();
     createSuma();
 }
-
+function importUsers(){
+    let datos = [];
+    fetch('/home/isaac/main2/proyectoleon/users/users.json', {mode: 'no-cors'})
+    .then(response => response.json())
+    .then(entradaData => console.log(entradaData));
+        /*
+        for (let usuario of entradaData){
+            let cadena = [usuario.user,usuario.edad,usuario.last,usuario.best]
+            datos.push(cadena);
+            console.log(cadena);
+        }
+        
+        
+    );
+    .catch(error => console.log(`PROMESA NO CUMPLIDA, ERROR EN PETICIÓN, CÓDIGO 404: ${error}`));
+    */
+}
 function createSuma(){
     imagenElegida.src = "img/clean.png";
     document.getElementById('resumen').innerHTML= `Has hecho ${numIntentos} ejercicios y has acertado ${numAciertos}. 
