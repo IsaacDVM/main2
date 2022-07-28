@@ -6,6 +6,27 @@ let numIntentos = 0;
 let numAciertos = 0;
 let fecha = new Date;
 let mes;
+let indexUser = 0;
+class users{
+    constructor(name,age,wins,intents){
+        this.name=name;
+        this.age=age;
+        this.wins=wins;
+        this.intents=intents;
+    }
+    points() {
+        return(this.wins-(this.intents-this.wins));
+    }
+}
+let user1 = new users("tester",9,0,0);
+let user2 = new users("León",7,0,0);
+let user3 = new users("Isaac",42,0,0);
+let usersArray = [user1,user2,user3];
+let usersJson = JSON.stringify(usersArray);
+/*
+console.log(`Este es usersArray ${usersArray}`);
+console.log(`Este es usersJson ${usersJson}`); 
+*/
 switch (fecha.getMonth()){
     case 0:
         mes = "Enero";
@@ -43,11 +64,41 @@ switch (fecha.getMonth()){
     case 11:
         mes = "Diciembre";
         break;
+} 
+function beginUser(){
+    let userEnter;
+    let patron = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
+    do {
+        userEnter = prompt("Introduce tu nombre de usuario sin espacios");
+    } while (patron.test(userEnter)===false){
+    }
+    console.log(`Usario ${userEnter} con formato válido...preparando conexión servidor para probar si estás autorizado`);
+    let pass = false;
+    usersArray.forEach (function(valor,indice){
+        if (valor.name === userEnter){
+            pass = true;
+            console.log('Usuario correcto');
+            console.log(`el índice es ${indice}`);
+            localStorage.setItem("index", indice);
+            indexUser = indice;
+        }
+    }
+    )      
+    if (pass === true){
+        localStorage.setItem("user", userEnter);
+        createSuma();
+    }
+    else {
+        alert('Usuario equivocado');
+        console.log('Usuario indicado no tiene permisos de acceso');
+        beginUser();
+    }
 }
 function createSuma(){
     imagenElegida.src = "img/clean.png";
     document.getElementById('resumen').innerHTML= `Has hecho ${numIntentos} ejercicios y has acertado ${numAciertos}. 
 Hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
+    document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].intents}.`;
     document.getElementById("res").value = "";
     num1 = Math.floor(Math.random() * 9 + 1);
     num2 =  Math.floor(Math.random() * 9 + 1);
@@ -63,6 +114,7 @@ function createResta(){
     imagenElegida.src = "img/clean.png";
     document.getElementById("res").value = "";
     document.getElementById('resumen').innerHTML=`Has hecho ${numIntentos} y has acertado ${numAciertos} hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
+    document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].intents}.`;
     num1 = Math.floor(Math.random() * 16 + 2);
     let cosita = Math.floor(Math.random() * 9 + 1);
     num2 =  num1 - cosita;
@@ -99,6 +151,8 @@ function check(){
     let userRes = parseInt(document.getElementById("res").value);
     if(res === userRes){
         numAciertos += 1;
+        usersArray[indexUser].intents += 1;
+        usersArray[indexUser].wins += 1;
         imagenElegida.src = "img/leonypokes.png";
         if (typeOpera === '-'){
             setTimeout(createSuma,1000);
@@ -109,9 +163,10 @@ function check(){
         
     }
     else{
+        usersArray[indexUser].intents += 1;
         imagenElegida.src = "img/epicfail.png";
         alert("¡¡¡has fallado!!!");
     }
 }
 document.getElementById('res').addEventListener('keydown', event => {if(event.code === 'Enter') {check();}});
-window.onload = createSuma();
+window.onload = beginUser();
