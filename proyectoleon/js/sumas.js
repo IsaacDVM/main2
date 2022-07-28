@@ -23,10 +23,6 @@ let user2 = new users("León",7,0,0);
 let user3 = new users("Isaac",42,0,0);
 let usersArray = [user1,user2,user3];
 let usersJson = JSON.stringify(usersArray);
-/*
-console.log(`Este es usersArray ${usersArray}`);
-console.log(`Este es usersJson ${usersJson}`); 
-*/
 switch (fecha.getMonth()){
     case 0:
         mes = "Enero";
@@ -77,8 +73,6 @@ function beginUser(){
     usersArray.forEach (function(valor,indice){
         if (valor.name === userEnter){
             pass = true;
-            console.log('Usuario correcto');
-            console.log(`el índice es ${indice}`);
             localStorage.setItem("index", indice);
             indexUser = indice;
         }
