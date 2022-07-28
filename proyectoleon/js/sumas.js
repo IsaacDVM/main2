@@ -92,7 +92,7 @@ function createSuma(){
     imagenElegida.src = "img/clean.png";
     document.getElementById('resumen').innerHTML= `Has hecho ${numIntentos} ejercicios y has acertado ${numAciertos}. 
 Hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
-    document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].intents}.`;
+    document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].wins}.`;
     document.getElementById("res").value = "";
     num1 = Math.floor(Math.random() * 9 + 1);
     num2 =  Math.floor(Math.random() * 9 + 1);
@@ -108,7 +108,7 @@ function createResta(){
     imagenElegida.src = "img/clean.png";
     document.getElementById("res").value = "";
     document.getElementById('resumen').innerHTML=`Has hecho ${numIntentos} y has acertado ${numAciertos} hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
-    document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].intents}.`;
+    document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].wins}.`;
     num1 = Math.floor(Math.random() * 16 + 2);
     let cosita = Math.floor(Math.random() * 9 + 1);
     num2 =  num1 - cosita;
@@ -161,6 +161,8 @@ function check(){
         imagenElegida.src = "img/epicfail.png";
         alert("¡¡¡has fallado!!!");
     }
+    document.getElementById('resumen').innerHTML=`Has hecho ${numIntentos} y has acertado ${numAciertos} hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
+    document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].wins}.`;
 }
 document.getElementById('res').addEventListener('keydown', event => {if(event.code === 'Enter') {check();}});
 window.onload = beginUser();
