@@ -240,6 +240,8 @@ function check(){
     }
     document.getElementById('resumen').innerHTML=`Has hecho ${numIntentos} y has acertado ${numAciertos} hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
     document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].wins}.`;
+    document.getElementById('noname').innerHTML= `Recuerda siempre ${localStorage.getItem("user")} que eres el mejor y que te queremos`;
+
 }
 document.getElementById('res').addEventListener('keydown', event => {if(event.code === 'Enter') {check();}});
 window.onload = beginUser();
