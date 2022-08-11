@@ -1,6 +1,7 @@
 let num1;
 let num2;
 let typeOpera;
+let typeGame = 0;
 let imagenElegida = document.getElementById("win-lose");
 let numIntentos = 0;
 let numAciertos = 0;
@@ -88,6 +89,29 @@ function beginUser(){
         beginUser();
     }
 }
+function createRandom(){
+    let miRandom = Math.floor(Math.random()*5);
+    typeGame = miRandom;
+    switch (miRandom) {
+        case 0:
+            createSuma();
+            break;
+        case 1:
+            createResta();
+            break;
+        case 2:
+            createSumaDec();
+            break;
+        case 3:
+            createRestaDec()
+            break;
+        case 4:
+            createSumaCent()
+            break;             
+        default:
+            console.log("Error en el número aleatorio");
+    }
+}
 function createSuma(){
     imagenElegida.src = "img/clean.png";
     document.getElementById('resumen').innerHTML= `Has hecho ${numIntentos} ejercicios y has acertado ${numAciertos}. 
@@ -104,14 +128,31 @@ Hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
     boxNum2.innerHTML = `${num2}`;
     operaBox.innerHTML = `${typeOpera}`;
 }
+function createSumaDec(){
+    imagenElegida.src = "img/clean.png";
+    document.getElementById('resumen').innerHTML= `Has hecho ${numIntentos} ejercicios y has acertado ${numAciertos}. 
+Hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
+    document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].wins}.`;
+    document.getElementById("res").value = "";
+    num1 = Math.floor(Math.random() * 9 + 1)*10;
+    num2 =  Math.floor(Math.random() * 9 + 1)*10;
+    typeOpera = '+';
+    let boxNum1 = document.getElementById("operador1");
+    let boxNum2 = document.getElementById("operador2");
+    let operaBox = document.getElementById("operacion");
+    boxNum1.innerHTML = `${num1}`;
+    boxNum2.innerHTML = `${num2}`;
+    operaBox.innerHTML = `${typeOpera}`;
+}
 function createResta(){
     imagenElegida.src = "img/clean.png";
     document.getElementById("res").value = "";
     document.getElementById('resumen').innerHTML=`Has hecho ${numIntentos} y has acertado ${numAciertos} hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
     document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].wins}.`;
-    num1 = Math.floor(Math.random() * 16 + 2);
+    num2 = Math.floor(Math.random() * 9 + 1);
     let cosita = Math.floor(Math.random() * 9 + 1);
-    num2 =  num1 - cosita;
+    num1 =  num2 + cosita;
+    /*
     if (num2 < 0){
         num2 = (-1)*num2   
     }
@@ -124,8 +165,41 @@ function createResta(){
         let minus = num2 - 10;
         num1 -= minus;
         num2 -= minus;
-    }    
+    }
+    */   
     typeOpera = '-';
+    let boxNum1 = document.getElementById("operador1");
+    let boxNum2 = document.getElementById("operador2");
+    let operaBox = document.getElementById("operacion");
+    boxNum1.innerHTML = `${num1}`;
+    boxNum2.innerHTML = `${num2}`;
+    operaBox.innerHTML = `${typeOpera}`;
+}
+function createRestaDec(){
+    imagenElegida.src = "img/clean.png";
+    document.getElementById("res").value = "";
+    document.getElementById('resumen').innerHTML=`Has hecho ${numIntentos} y has acertado ${numAciertos} hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
+    document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].wins}.`;
+    num2 = Math.floor(Math.random() * 9 + 1)*10;
+    let cosita = Math.floor(Math.random() * 9 + 1)*10;
+    num1 =  num2 + cosita; 
+    typeOpera = '-';
+    let boxNum1 = document.getElementById("operador1");
+    let boxNum2 = document.getElementById("operador2");
+    let operaBox = document.getElementById("operacion");
+    boxNum1.innerHTML = `${num1}`;
+    boxNum2.innerHTML = `${num2}`;
+    operaBox.innerHTML = `${typeOpera}`;
+}
+function createSumaCent(){
+    imagenElegida.src = "img/clean.png";
+    document.getElementById('resumen').innerHTML= `Has hecho ${numIntentos} ejercicios y has acertado ${numAciertos}. 
+Hoy es ${fecha.getDate()} de ${mes} del ${fecha.getFullYear()}`;
+    document.getElementById('total').innerHTML= `En total has hecho ${usersArray[indexUser].intents} ejercicios y has acertado ${usersArray[indexUser].wins}.`;
+    document.getElementById("res").value = "";
+    num1 = Math.floor(Math.random() * 9 + 1)*100;
+    num2 =  Math.floor(Math.random() * 9 + 1)*100;
+    typeOpera = '+';
     let boxNum1 = document.getElementById("operador1");
     let boxNum2 = document.getElementById("operador2");
     let operaBox = document.getElementById("operacion");
@@ -136,11 +210,20 @@ function createResta(){
 function check(){
     let res;
     numIntentos += 1;
-    if (typeOpera == '+'){
+    if (typeGame == 0){
         res = num1 + num2;
     }
-    else{
+    else if (typeGame == 1){
         res = num1 - num2;
+    }
+    else if (typeGame == 2){
+        res = num1 + num2;
+    }    
+    else if (typeGame == 3){
+        res = num1 - num2;
+    }
+    else if (typeGame == 4){
+        res = num1 + num2;
     }
     let userRes = parseInt(document.getElementById("res").value);
     if(res === userRes){
@@ -148,13 +231,7 @@ function check(){
         usersArray[indexUser].intents += 1;
         usersArray[indexUser].wins += 1;
         imagenElegida.src = "img/leonypokes.png";
-        if (typeOpera === '-'){
-            setTimeout(createSuma,1000);
-        }
-        else{
-            setTimeout(createResta,1000);
-        }
-        
+        setTimeout(createRandom,1000);        
     }
     else{
         usersArray[indexUser].intents += 1;
